@@ -9,4 +9,5 @@ public class NewNewsApplication {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(NewNewsApplication.class, args);
     }
+
 }

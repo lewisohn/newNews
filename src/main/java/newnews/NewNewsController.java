@@ -10,7 +10,7 @@ public class NewNewsController {
     @GetMapping("*")
     @ResponseBody
     public String home() {
-        return("Hello World!");
+        return("It's the New News!");
     }
     
 }

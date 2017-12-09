@@ -1,0 +1,54 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+#content {
+    margin: 2em;
+}
+
+footer {
+    border-top: 1px solid #000;
+    font-size: 0.9em;
+    margin-top: 1em;
+    padding-top: 1em;
+}
+
+footer, header h1 {
+    text-align: center;
+    width: 100%;
+}
+
+header {
+    background-color: #802080;
+    color: #fff;
+    padding: 1em;
+}
+
+header h1 {
+    margin-top: 0;
+}
+
+header h1 a, nav li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header img {
+    max-height: 1em;
+    vertical-align: top;
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav li:not(:first-child) {
+    margin-left: 1em;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}

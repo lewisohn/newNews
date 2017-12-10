@@ -1,14 +1,29 @@
+a {
+    text-decoration: none;
+}
+
+#admin h3, nav li {
+    display: inline-block;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
 }
 
 #content {
-    margin: 2em;
+    margin: 1em 2em;
+    width: calc(75% - 2em);
+}
+
+#content, #sidebar {
+    float: left;
+    min-height: 300px;
 }
 
 footer {
     border-top: 1px solid #000;
+    clear: both;
     font-size: 0.9em;
     margin-top: 1em;
     padding-top: 1em;
@@ -31,16 +46,10 @@ header h1 {
 
 header h1 a, nav li a {
     color: #fff;
-    text-decoration: none;
 }
 
-header img {
-    max-height: 1em;
-    vertical-align: top;
-}
-
-nav li {
-    display: inline-block;
+nav li:first-child {
+    font-weight: bold;
 }
 
 nav li:not(:first-child) {
@@ -51,4 +60,20 @@ nav ul {
     margin: 0;
     padding: 0;
     text-align: center;
+}
+
+th {
+    min-width: 10em;
+    text-align: left;
+}
+
+#sidebar {
+    background-color: #000;
+    padding: 2em 0;
+    width: calc(25% - 2em);
+}
+
+#wrapper {
+    width: 100%;
+    margin: 0 auto;
 }

@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CategoryController extends MasterController {
 
     @Autowired
-    private CategoryService cs;
+    private CategoryService catServ;
 
     @GetMapping("/category/{shortname}")
     public String getCategory(Model model, @PathVariable String shortname) {
-        Category category = cs.findByShortname(shortname.toLowerCase());
+        Category category = catServ.findByShortname(shortname.toLowerCase());
         model.addAttribute("category", category);
         return "category";
     }
@@ -28,10 +28,15 @@ public class CategoryController extends MasterController {
         return "categories";
     }
 
-    @PostMapping("/categories")
-    public String postCategories(@RequestParam String name) {
-        cs.addCategory(name);
-        return "redirect:/categories";
+    @GetMapping("/categories/new")
+    public String getNewCategory(Model model) {
+        return "admin/newcategory";
+    }
+
+    @PostMapping("/categories/new")
+    public String postNewCategory(@RequestParam String name) {
+        catServ.addCategory(name);
+        return "redirect:/admin";
     }
 
 }

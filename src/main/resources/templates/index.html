@@ -3,10 +3,17 @@
     <head th:include="fragments/head :: head"></head>
     <body>
         <header th:include="fragments/header :: header"></header>
-        <div id="content">
-        <ul id="articles">
-            <li>News articles go here</li>
-        </ul>
+        <div id="wrapper">
+            <div id="content">
+                <h2>Latest news</h2>
+                <ul id="articles">
+                    <li th:each="article : ${latest}">
+                        <a th:href="'/article/' + ${article.shortname}" th:text="${article.name}">Article</a>
+                    </li>
+                </ul>
+            </div>
+            <div id ="sidebar">
+            </div>
         </div>
         <footer th:include="fragments/footer :: footer"></footer>
     </body>

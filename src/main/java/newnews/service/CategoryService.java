@@ -1,6 +1,6 @@
 package newnews.service;
 
-import java.util.List;
+import java.util.ArrayList;
 import lombok.Data;
 import newnews.domain.Category;
 import newnews.repository.CategoryRepository;
@@ -16,10 +16,6 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categories;
 
-    public List<Category> findAll() {
-        return categories.findAll();
-    }
-
     public Page<Category> findAll(Pageable pageable) {
         return categories.findAll(pageable);
     }
@@ -30,6 +26,17 @@ public class CategoryService {
 
     public Category findByShortname(String shortname) {
         return categories.findByShortname(shortname);
+    }
+
+    public ArrayList<Category> findMany(Long[] ids) {
+        ArrayList<Category> found = new ArrayList<>();
+        for (Long id : ids) {
+            Category c = categories.getOne(id);
+            if (c != null) {
+                found.add(c);
+            }
+        }
+        return found;
     }
 
     public void addCategory(String name) {

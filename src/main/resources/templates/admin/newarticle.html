@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/head :: head"></head>
+    <body>
+        <header th:include="fragments/header :: header"></header>
+        <div id="wrapper">
+            <div id="content">
+                <h2>New article</h2>
+                <form th:action="@{/articles/new}" method="POST">
+                    <p><label for="name">Headline</label> <input name="name" id="name" /></p>
+<!--                    <p><label for="image">Image</label> <input type="file" name="image" id="image" /></p>-->
+                    <p><label for="standfirst">Standfirst</label> <input name="standfirst" id="standfirst" /></p>
+                    <p><label for="text">Body</label> <input name="text" id="text" /></p>
+                    <p>Authors</p>
+                    <ul th:include="fragments/chooser :: authors"></ul>
+                    <p>Categories</p>
+                    <ul th:include="fragments/chooser :: categories"></ul>
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
+            <div id ="sidebar">
+            </div>
+        </div>
+        <footer th:include="fragments/footer :: footer"></footer>
+    </body>
+</html>

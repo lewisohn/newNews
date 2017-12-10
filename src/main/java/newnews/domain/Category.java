@@ -1,8 +1,10 @@
 package newnews.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -16,14 +18,19 @@ public class Category extends AbstractPersistable<Long> implements Serializable 
 
     @Id
     private Long id;
+
+    @ManyToMany(mappedBy = "categories")
+    private List<Article> articles;
     private String name;
     private String shortname;
 
     public Category(String name) {
         this.name = name;
-        this.shortname = name.replaceAll("[^A-Za-z0-9]", "").toLowerCase();
+        this.shortname = Utilities.trim(name);
     }
-    
-    
+
+    public int getSize() {
+        return articles.size();
+    }
 
 }

@@ -6,8 +6,8 @@ public final class Trimmer {
     }
 
     public static String trim(String string) {
-        return string.replaceAll("[^a-zA-Z0-9\\s]", "").replaceAll(" ", "-")
-                .toLowerCase().substring(0, Math.min(50, string.length()));
+        String temp = string.replaceAll("[^a-zA-Z0-9\\s]", "").replaceAll(" ", "-").toLowerCase();
+        return (temp.length() > 50 ? temp.substring(0, 50) : temp);
     }
 
 }

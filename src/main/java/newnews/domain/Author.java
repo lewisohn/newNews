@@ -1,6 +1,7 @@
 package newnews.domain;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,14 +20,14 @@ public class Author extends AbstractPersistable<Long> implements Serializable {
     @Id
     private Long id;
 
-    @ManyToMany(mappedBy = "authors")  
+    @ManyToMany(mappedBy = "authors")
     private List<Article> articles;
     private String name;
     private String shortname;
 
     public Author(String name) {
         this.name = name;
-        this.shortname = Utilities.trim(name);
+        updateShortname();
     }
 
     public void addArticle(Article article) {
@@ -35,6 +36,28 @@ public class Author extends AbstractPersistable<Long> implements Serializable {
 
     public int getSize() {
         return articles.size();
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public String getLastActive() {
+        if (!articles.isEmpty()) {
+            Collections.sort(articles);
+            return articles.get(0).getDate().toString();
+        } else {
+            return "Never";
+        }
+    }
+
+    public boolean isAuthorOf(Article article) {
+        return articles.contains(article);
+    }
+
+    public void updateShortname() {
+        shortname = Trimmer.trim(name);
     }
 
 }

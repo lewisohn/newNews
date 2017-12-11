@@ -6,21 +6,37 @@
         <div id="wrapper">
             <div id="content">
                 <h2>New article</h2>
-                <form th:action="@{/articles/new}" method="POST">
-                    <p><label for="name">Headline</label> <input name="name" id="name" /></p>
-<!--                    <p><label for="image">Image</label> <input type="file" name="image" id="image" /></p>-->
-                    <p><label for="standfirst">Standfirst</label> <input name="standfirst" id="standfirst" /></p>
-                    <p><label for="text">Body</label> <input name="text" id="text" /></p>
-                    <p>Authors</p>
-                    <ul th:include="fragments/chooser :: authors"></ul>
-                    <p>Categories</p>
-                    <ul th:include="fragments/chooser :: categories"></ul>
+                <form th:action="@{/articles/new}" method="POST" enctype="multipart/form-data">
+                    <div>
+                        <label for="name">Headline</label>
+                        <input type="text" name="name" id="name" />
+                    </div>
+                    <div>
+                        <label for="image">Image</label>
+                        <input type="file" name="image" id="image" accept="image/jpeg, image/png" />
+                    </div>
+                    <div>
+                        <label for="standfirst">Standfirst</label>
+                        <input type="text" name="standfirst" id="standfirst" />
+                    </div>
+                    <div id="newarticle-body">
+                        <label for="text">Body</label>
+                        <textarea name="text" id="text" rows="10"></textarea>
+                    </div>
+                    <div id="newarticle-authors">
+                        <label>Authors</label>
+                        <ul th:include="fragments/chooser :: authors"></ul>
+                    </div>
+                    <div id="newarticle-categories">
+                        <label>Categories</label>
+                        <ul th:include="fragments/chooser :: categories"></ul>
+                    </div>
                     <input type="submit" value="Submit" />
                 </form>
             </div>
             <div id ="sidebar">
             </div>
+            <footer th:include="fragments/footer :: footer"></footer>
         </div>
-        <footer th:include="fragments/footer :: footer"></footer>
     </body>
 </html>

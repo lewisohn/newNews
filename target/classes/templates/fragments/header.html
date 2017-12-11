@@ -11,7 +11,7 @@
                     <a href="/categories">Categories</a>
                 </li>
                 <li th:each="category : ${categories}">
-                    <a th:href="'/category/' + ${category.shortname}" th:text="${category.name}"></a>
+                    <a th:href="'/categories/' + ${category.shortname}" th:text="${category.name}"></a>
                 </li>
             </ul>
         </nav>

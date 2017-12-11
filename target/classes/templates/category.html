@@ -5,7 +5,7 @@
         <header th:include="fragments/header :: header"></header>
         <div id="wrapper">
             <div id="content">
-                <h2 th:text="${category.name}">Category</h2>
+                <h2>Articles filed under <span th:text="${category.name}">name</span></h2>
                 <ul>
                     <li th:each="article : ${category.articles}">
                         <a th:href="'/articles/' + ${article.shortname}" th:text="${article.name}">Article</a>
@@ -14,7 +14,7 @@
             </div>
             <div id ="sidebar">
             </div>
+            <footer th:include="fragments/footer :: footer"></footer>
         </div>
-        <footer th:include="fragments/footer :: footer"></footer>
     </body>
 </html>

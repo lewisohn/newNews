@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/head :: head"></head>
+    <body>
+        <header th:include="fragments/header :: header"></header>
+        <div id="wrapper">
+            <div id="content">
+                <h2>Edit category</h2>
+                <form th:action="@{/categories/{shortname}/edit(shortname=${category.shortname})}" method="POST">
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" th:value="${category.name}"></input>
+                    </div>
+                    <input type="submit" value="Submit"></input>
+                </form>
+            </div>
+            <div id ="sidebar">
+            </div>
+            <footer th:include="fragments/footer :: footer"></footer>
+        </div>
+    </body>
+</html>
+
+

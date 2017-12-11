@@ -6,69 +6,82 @@
         <div id="wrapper">
             <div id="content">
                 <h2>Control Panel</h2>
-                <h3>Articles</h3> <a href="articles/new">(New article)</a>
+                <h3>Articles</h3> <a href="articles/new" class="new">New article</a>
                 <table id="articles">
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>Headline</th>
                             <th>Published</th>
-                            <th>Views</th>
-                            <th></th>
-                            <th></th>
+                            <th>Views this week</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <tr th:if="${artSize == 0}">
+                            <td colspan="5">No articles</td>
+                        </tr>
                         <tr th:each="article : ${latest}">
-                            <td th:text="${article.name}"></td>
-                            <td th:text="${article.date}"></td>
-                            <td th:text="${article.views}"></td>
-                            <td><a th:href="'edit/' + ${article.shortname}"></a>Edit</td>
-                            <td><a th:href="'delete/' + ${article.shortname}"></a>Delete</td>
+                            <td><a th:href="'/articles/' + ${article.shortname}" th:text="${article.name}">Headline</a></td>
+                            <td th:text="${article.date}">Published</td>
+                            <td th:text="${article.views}">Views this week</td>
+                            <td><a th:href="'/articles/' + ${article.shortname} + '/edit'">Edit</a></td>
+                            <td><a th:href="'/articles/' + ${article.shortname} + '/delete'">Delete</a></td>
                         </tr>
                     </tbody>
                 </table>
-                <h3>Authors</h3> <a href="authors/new">(New author)</a>
+                <h3>Authors</h3> <a href="authors/new" class="new">New author</a>
                 <table id="authors">
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Last active</th>
                             <th>Articles</th>
-                            <th></th>
-                            <th></th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <tr th:if="${authSize == 0}">
+                            <td colspan="5">No authors</td>
+                        </tr>
                         <tr th:each="author : ${authors}">
-                            <td th:text="${author.name}"></td>
-                            <td th:text="${author.size}"></td>
-                            <td><a th:href="'edit/' + ${author.shortname}"></a>Edit</td>
-                            <td><a th:href="'delete/' + ${author.shortname}"></a>Delete</td>
+                            <td><a th:href="'/authors/' + ${author.shortname}" th:text="${author.name}">Name</a></td>
+                            <td th:text="${author.lastActive}"></td>
+                            <td th:text="${author.size}">Articles</td>
+                            <td><a th:href="'/authors/' + ${author.shortname} + '/edit'">Edit</a></td>
+                            <td><a th:href="'/authors/' + ${author.shortname} + '/delete'">Delete</a></td>
                         </tr>
                     </tbody>
                 </table>
-                <h3>Categories</h3> <a href="categories/new">(New category)</a>
+                <h3>Categories</h3> <a href="categories/new" class="new">New category</a>
                 <table id="categories">
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Last active</th>
                             <th>Articles</th>
-                            <th></th>
-                            <th></th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <tr th:if="${catSize == 0}">
+                            <td colspan="5">No categories</td>
+                        </tr>
                         <tr th:each="category : ${categories}">
-                            <td th:text="${category.name}"></td>
-                            <td th:text="${category.size}"></td>
-                            <td><a th:href="'edit/' + ${category.shortname}"></a>Edit</td>
-                            <td><a th:href="'delete/' + ${category.shortname}"></a>Delete</td>
+                            <td><a th:href="'/categories/' + ${category.shortname}"  th:text="${category.name}">Name</a></td>
+                            <td th:text="${category.lastActive}"></td>
+                            <td th:text="${category.size}">Articles</td>
+                            <td><a th:href="'/categories/' + ${category.shortname} + '/edit'">Edit</a></td>
+                            <td><a th:href="'/categories/' + ${category.shortname} + '/delete'">Delete</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div id ="sidebar">
             </div>
+            <footer th:include="fragments/footer :: footer"></footer>
         </div>
-        <footer th:include="fragments/footer :: footer"></footer>
     </body>
 </html>

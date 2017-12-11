@@ -3,6 +3,7 @@ package newnews.service;
 import java.util.ArrayList;
 import lombok.Data;
 import newnews.domain.Category;
+import newnews.domain.Trimmer;
 import newnews.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -40,12 +41,31 @@ public class CategoryService {
     }
 
     public void addCategory(String name) {
-        if (!name.equals("")) {
-            Category c = findByName(name);
-            if (c == null) {
+        if (validate(name)) {
+            if (findByName(Trimmer.trim(name)) == null) {
                 categories.save(new Category(name));
             }
         }
+    }
+
+    public Long size() {
+        return categories.count();
+    }
+
+    public void editCategory(String shortname, String name) {
+        if (validate(name)) {
+            Category category = findByShortname(shortname);
+            Category duplicate = findByShortname(Trimmer.trim(name));
+            if (duplicate == null || duplicate.equals(category)) {
+                category.setName(name);
+                category.updateShortname();
+                categories.save(category);
+            }
+        }
+    }
+
+    private boolean validate(String name) {
+        return (name.length() > 0);
     }
 
 }

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/head :: head"></head>
+    <body>
+        <header th:include="fragments/header :: header"></header>
+        <div id="wrapper">
+            <div id="content">
+                <h2>Edit article</h2>
+                <form th:action="@{/articles/{shortname}/edit(shortname=${article.shortname})}" method="POST" enctype="multipart/form-data">
+                    <div>
+                        <label for="name">Headline</label>
+                        <input type="text" name="name" id="name" th:value="${article.name}" />
+                    </div>
+                    <div id="edit-image">
+                        <label for="image">Image</label>
+                        <input type="file" name="image" id="image" accept="image/jpeg, image/png" />
+                        <p>Leave blank to preserve existing image</p>
+                        <img th:src="@{/articles/{shortname}/image(shortname=${article.shortname})}" th:alt="${article.name}" />
+                    </div>
+                    <div>
+                        <label for="standfirst">Standfirst</label>
+                        <input type="text" name="standfirst" id="standfirst" th:value="${article.standfirst}" />
+                    </div>
+                    <div id="newarticle-body">
+                        <label for="text">Body</label>
+                        <textarea name="text" id="text" rows="10" th:text="${article.text}"></textarea>
+                    </div>
+                    <div id="newarticle-authors">
+                        <label>Authors</label>
+                        <ul th:include="fragments/chooser :: authors"></ul>
+                    </div>
+                    <div id="newarticle-categories">
+                        <label>Categories</label>
+                        <ul th:include="fragments/chooser :: categories"></ul>
+                    </div>
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
+            <div id ="sidebar">
+            </div>
+            <footer th:include="fragments/footer :: footer"></footer>
+        </div>
+    </body>
+</html>

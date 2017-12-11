@@ -8,12 +8,13 @@ E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\repository\AuthorRep
 E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\repository\CategoryRepository.java
 E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\controller\ArticleController.java
 E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\controller\CategoryController.java
+E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\domain\Visit.java
 E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\service\AuthorService.java
 E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\controller\AdminController.java
+E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\domain\Trimmer.java
 E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\domain\Author.java
 E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\controller\MasterController.java
 E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\controller\AuthorController.java
 E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\repository\ArticleRepository.java
-E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\domain\Image.java
-E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\domain\Utilities.java
+E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\repository\VisitRepository.java
 E:\Documents\NetBeansProjects\NewNews\src\main\java\newnews\ProductionProfile.java

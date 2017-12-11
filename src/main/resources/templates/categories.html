@@ -7,14 +7,14 @@
             <div id="content">
                 <h2>Categories</h2>
                 <ul id="categories">
-                    <li th:each="category: ${categories}">
-                        <a th:href="${'/category/' + category.shortname}" th:text="${category.name}"></a>
+                    <li th:each="category : ${categories}">
+                        <a th:href="${'/categories/' + category.shortname}" th:text="${category.name}"></a>
                     </li>
                 </ul>
             </div>
             <div id ="sidebar">
             </div>
+            <footer th:include="fragments/footer :: footer"></footer>
         </div>
-        <footer th:include="fragments/footer :: footer"></footer>
     </body>
 </html>

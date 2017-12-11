@@ -35,6 +35,21 @@ public abstract class MasterController {
     public Page<Category> modelCategories() {
         return catServ.findAll(tenByName);
     }
+    
+    @ModelAttribute("catSize")
+    public Long modelCatSize() {
+        return catServ.size();
+    }
+    
+    @ModelAttribute("artSize")
+    public Long modelArtSize() {
+        return artServ.size();
+    }
+    
+    @ModelAttribute("authSize")
+    public Long modelAuthSize() {
+        return authServ.size();
+    }
 
     @ModelAttribute("latest")
     public Page<Article> modelLatestArticles() {

@@ -5,20 +5,29 @@
         <header th:include="fragments/header :: header"></header>
         <div id="wrapper">
             <div id="content">
-                <h2 th:text="${article.name}">Article</h2>
-                <div th:text="${article.text}"></div>
-                <h3>Categories</h3>
-                <ul>
-                    <li th:each="category : ${article.categories}" th:text="${category.name}">Category</li>
-                </ul>
-                <h3>Authors</h3>
-                <ul>
-                    <li th:each="author : ${article.authors}" th:text="${author.name}">Author</li>
-                </ul>
+                <h2 th:text="${article.name}">Headline</h2>
+                <div id="article-authors">Written by
+                    <ul class="article-list">
+                        <li th:each="author : ${article.authors}"><a th:href="'/authors/' + ${author.shortname}" th:text="${author.name}">Author</a></li>
+                    </ul>
+                </div>
+                <div id="article-date">
+                    Published <span th:text="${article.date}">Date</span>
+                </div>
+                <div id="article-image">
+                    <img th:src="@{/articles/{shortname}/image(shortname=${article.shortname})}" th:alt="${article.name}" />
+                </div>
+                <div id="article-standfirst" th:text="${article.standfirst}">Standfirst</div>
+                <div id="article-body" th:utext="${#strings.replace( #strings.escapeXml( article.text ),T(java.lang.System).getProperty('line.separator'),'&lt;br /&gt;')}">Body</div>
+                <div id="article-categories">Filed under
+                    <ul class="article-list">
+                        <li th:each="category : ${article.categories}"><a th:href="'/categories/' + ${category.shortname}" th:text="${category.name}">Category</a></li>
+                    </ul>
+                </div>
             </div>
             <div id ="sidebar">
             </div>
+            <footer th:include="fragments/footer :: footer"></footer>
         </div>
-        <footer th:include="fragments/footer :: footer"></footer>
     </body>
 </html>

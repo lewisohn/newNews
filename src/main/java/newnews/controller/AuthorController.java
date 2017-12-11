@@ -1,10 +1,12 @@
 package newnews.controller;
 
+import newnews.domain.Author;
 import newnews.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -14,9 +16,34 @@ public class AuthorController {
     @Autowired
     private AuthorService authServ;
 
+    @GetMapping("/authors/{shortname}")
+    public String getAuthor(Model model, @PathVariable String shortname) {
+        Author author = authServ.findByShortname(shortname.toLowerCase());
+        model.addAttribute("author", author);
+        return "author";
+    }
+
+    @GetMapping("/authors")
+    public String getAuthors() {
+        return "categories";
+    }
+
+    @GetMapping("/authors/{shortname}/edit")
+    public String getEditAuthor(Model model, @PathVariable String shortname) {
+        Author author = authServ.findByShortname(shortname.toLowerCase());
+        model.addAttribute("author", author);
+        return "admin/editauthor";
+    }
+
     @GetMapping("/authors/new")
-    public String getNewAuthor(Model model) {
+    public String getNewAuthor() {
         return "admin/newauthor";
+    }
+
+    @PostMapping("/authors/{shortname}/edit")
+    public String postEditAuthor(@PathVariable String shortname, @RequestParam String name) {
+        authServ.editAuthor(shortname, name);
+        return "redirect:/admin";
     }
 
     @PostMapping("/authors/new")

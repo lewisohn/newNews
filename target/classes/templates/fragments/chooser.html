@@ -6,13 +6,13 @@
     <body>
         <ul th:fragment="authors">
             <li th:each="author : ${authors}">
-                <input type="checkbox" th:id="${author}" th:value="${author.id}" th:name="authors" />
+                <input type="checkbox" th:id="${author}" th:value="${author.id}" th:name="authors" th:checked="${author.isAuthorOf(article)}" />
                 <label th:for="${author}" th:text="${author.name}">Author</label>
             </li>
         </ul>
         <ul th:fragment="categories">
             <li th:each="category : ${categories}">
-                <input type="checkbox" th:id="${category}" th:value="${category.id}" th:name="categories" />
+                <input type="checkbox" th:id="${category}" th:value="${category.id}" th:name="categories" th:checked="${category.isCategoryOf(article)}" />
                 <label th:for="${category}" th:text="${category.name}">Category</label>
             </li>
         </ul>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/head :: head"></head>
+    <body>
+        <header th:include="fragments/header :: header"></header>
+        <div id="wrapper">
+            <div id="content">
+                <h2>Articles written by <span th:text="${author.name}">name</span></h2>
+                <ul>
+                    <li th:each="article : ${author.articles}">
+                        <a th:href="'/articles/' + ${article.shortname}" th:text="${article.name}">Article</a>
+                    </li>
+                </ul>
+            </div>
+            <div id ="sidebar">
+            </div>
+            <footer th:include="fragments/footer :: footer"></footer>
+        </div>
+    </body>
+</html>

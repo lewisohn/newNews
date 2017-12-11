@@ -1,6 +1,7 @@
 package newnews.domain;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,6 +20,8 @@ public class Category extends AbstractPersistable<Long> implements Serializable 
     @Id
     private Long id;
 
+//    @Getter(AccessLevel.NONE)
+//    private LocalDate lastActive;
     @ManyToMany(mappedBy = "categories")
     private List<Article> articles;
     private String name;
@@ -26,11 +29,33 @@ public class Category extends AbstractPersistable<Long> implements Serializable 
 
     public Category(String name) {
         this.name = name;
-        this.shortname = Utilities.trim(name);
+        updateShortname();
     }
 
     public int getSize() {
         return articles.size();
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
+    public String getLastActive() {
+        if (!articles.isEmpty()) {
+            Collections.sort(articles);
+            return articles.get(0).getDate().toString();
+        } else {
+            return "Never";
+        }
+    }
+
+    public boolean isCategoryOf(Article article) {
+        return articles.contains(article);
+    }
+
+    public final void updateShortname() {
+        shortname = Trimmer.trim(name);
     }
 
 }

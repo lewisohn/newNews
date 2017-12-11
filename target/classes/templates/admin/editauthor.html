@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/head :: head"></head>
+    <body>
+        <header th:include="fragments/header :: header"></header>
+        <div id="wrapper">
+            <div id="content">
+                <h2>Edit author</h2>
+                <form th:action="@{/authors/{shortname}/edit(shortname=${author.shortname})}" method="POST">
+                    <div>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" th:value="${author.name}"></input>
+                    </div>
+                    <input type="submit" value="Submit"></input>
+                </form>
+            </div>
+            <div id ="sidebar">
+            </div>
+            <footer th:include="fragments/footer :: footer"></footer>
+        </div>
+    </body>
+</html>

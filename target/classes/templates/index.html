@@ -8,13 +8,13 @@
                 <h2>Latest news</h2>
                 <ul id="articles">
                     <li th:each="article : ${latest}">
-                        <a th:href="'/article/' + ${article.shortname}" th:text="${article.name}">Article</a>
+                        <a th:href="'/articles/' + ${article.shortname}" th:text="${article.name}">Article</a>
                     </li>
                 </ul>
             </div>
             <div id ="sidebar">
             </div>
+            <footer th:include="fragments/footer :: footer"></footer>
         </div>
-        <footer th:include="fragments/footer :: footer"></footer>
     </body>
 </html>

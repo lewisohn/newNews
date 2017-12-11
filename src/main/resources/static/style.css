@@ -2,13 +2,46 @@ a {
     text-decoration: none;
 }
 
-#admin h3, nav li {
+a.new:before {
+    content: '\002b \00a0';
+}
+
+#admin h3, .article-list, .article-list li, nav li {
     display: inline-block;
+    width: 6rem;
+}
+
+#article-categories {
+    font-style: italic;
+    margin-top: 1em;
+}
+
+#article-image img {
+    margin: 1em 0;
+    max-width: 100%;
+    max-height: 20em;
+}
+
+.article-list {
+    padding-left: 0;
+    margin: 0;
+}
+
+.article-list li:not(:last-child):after {
+    content: '\002c';
+}
+
+#article-standfirst {
+    font-weight: bold;
+    margin-bottom: 1em;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
     margin: 0;
+}
+
+body, textarea {
+    font-family: 'Roboto', sans-serif;
 }
 
 #content {
@@ -21,17 +54,74 @@ body {
     min-height: 300px;
 }
 
+#content a, #sidebar a, footer a,
+#content a:visited, #sidebar a:visited, footer a:visited {
+    color: #0000ee;
+}
+
+#content a.new {
+    background-color: #802080;
+    color: #fff;
+    display: inline-block;
+    margin-left: 1em;
+    padding: 0.1em 0.3em;
+    transition: background-color 0.2s ease;
+}
+
+#content a.new:hover {
+    background-color: #bd2fbd;
+}
+
+#edit-image img {
+    display: block;
+    margin-left: 6.25em;
+    max-height: 10em;
+    max-width: 100%;
+}
+
+#edit-image img, #edit-image p {
+}
+
+#edit-image p {
+    font-size: 0.9em;
+    margin-left: 6.25rem;
+}
+
 footer {
-    border-top: 1px solid #000;
     clear: both;
     font-size: 0.9em;
-    margin-top: 1em;
+    margin: 1em auto;
     padding-top: 1em;
 }
 
 footer, header h1 {
     text-align: center;
     width: 100%;
+}
+
+form div * {
+    vertical-align: top;
+    line-height: 1.5em;
+}
+
+form div:not(:first-child), form input[type="submit"] {
+    margin-top: 1em;
+}
+
+form input[type="text"], form input[type="password"], form textarea {
+    box-sizing: border-box;
+    padding: 0 0.2em;
+    width: 57%;
+}
+
+form label {
+    display: inline-block;
+    min-width: 6em;
+    width: 9%;
+}
+
+h3 {
+    margin: 0 0 0.5em 0;
 }
 
 header {
@@ -62,9 +152,43 @@ nav ul {
     text-align: center;
 }
 
+#newarticle-authors ul, #newarticle-categories ul {
+    display: inline-block;
+    margin: 0 auto;
+    padding-left: 0;   
+}
+
+#newarticle-authors ul li, #newarticle-categories ul li {
+    list-style-type: none;
+}
+
+table {
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+    width: 100%;
+}
+
+td, th {
+    border-bottom: 1px solid #000;
+}
+
 th {
-    min-width: 10em;
+    background-color: #ccc;
+    border-top: 1px solid #000;
     text-align: left;
+    word-wrap: break-word;
+}
+
+th:first-child {
+    width: 50%;
+}
+
+th:not(:first-child) {
+    width: 12.5%;
+}
+
+th, td {
+    padding: 0.5em;
 }
 
 #sidebar {
@@ -74,6 +198,8 @@ th {
 }
 
 #wrapper {
-    width: 100%;
+    background-color: #fff;
     margin: 0 auto;
+    overflow: auto;
+    width: 80%;
 }

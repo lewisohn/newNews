@@ -2,14 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Header</title>
+        <meta charset="UTF-8" />
     </head>
     <body th:fragment="header">
         <h1><a href="/">New News</a></h1>
         <nav>
             <ul>
                 <li>
+                    <a href="/">Latest news</a>
+                </li>
+                <li>
                     <a href="/categories">Categories</a>
                 </li>
+                <li>
+                    <a href="/authors">Authors</a>
+                </li>
+                <li>
+                    <a href="/admin">Control panel</a>
+                </li>
+            </ul>
+            <ul>
                 <li th:each="category : ${categories}">
                     <a th:href="'/categories/' + ${category.shortname}" th:text="${category.name}"></a>
                 </li>

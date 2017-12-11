@@ -10,6 +10,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+/**
+ * A record of one user's visit to one article.
+ *
+ * @author Oliver
+ */
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = false)
@@ -22,7 +27,12 @@ public class Visit extends AbstractPersistable<Long> implements Serializable {
     @ManyToOne
     private Article article;
     private LocalDateTime dateTime;
-    
+
+    /**
+     * Creates a new visit for the specified article.
+     *
+     * @param article The article that has just been visited.
+     */
     public Visit(Article article) {
         this.article = article;
         this.dateTime = LocalDateTime.now();

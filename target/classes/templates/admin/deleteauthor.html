@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/head :: head"></head>
+    <body>
+        <header th:include="fragments/header :: header"></header>
+        <div id="wrapper">
+            <div id="content">
+                <h2>Delete author</h2>
+                <div>Are you sure you want to delete <span id="delete-name" th:text="${author.name}">author</span>? This cannot be undone.</div>
+                <form th:action="@{/authors/{shortname}/delete(shortname=${author.shortname})}" th:method="DELETE">
+                    <input id="submit" type="submit" value="Delete"></input>
+                </form>
+            </div>
+            <div id="sidebar" th:include="fragments/sidebar :: sidebar"></div>
+        </div>
+    </body>
+</html>
+
+

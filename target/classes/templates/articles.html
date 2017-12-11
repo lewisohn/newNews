@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/head :: head"></head>
+    <body>
+        <header th:include="fragments/header :: header"></header>
+        <div id="wrapper">
+            <div id="content">
+                <h2>Latest news</h2>
+                <div th:if="${artSize == 0}">No articles</div>
+                <ul id="articles" th:if="${artSize > 0}">
+                    <li th:each="article : ${latest}">
+                        <div class="list-article">
+                            <a th:href="'/articles/' + ${article.shortname}" class="list-article-image">
+                                <img th:src="@{/articles/{shortname}/image(shortname=${article.shortname})}" th:alt="${article.name}" />
+                            </a>
+                            <a th:href="'/articles/' + ${article.shortname}" th:text="${article.name}">Article</a>
+                            <p th:text="${article.standfirst}">Standfirst</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="sidebar" th:include="fragments/sidebar :: sidebar"></div>
+        </div>
+    </body>
+</html>

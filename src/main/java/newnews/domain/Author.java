@@ -11,6 +11,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+/**
+ * An author of articles. Must have a name.
+ *
+ * @author Oliver
+ */
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = false)
@@ -25,24 +30,34 @@ public class Author extends AbstractPersistable<Long> implements Serializable {
     private String name;
     private String shortname;
 
+    /**
+     * Creates a new author with the given name.
+     *
+     * @param name The full name of this author.
+     */
     public Author(String name) {
         this.name = name;
         updateShortname();
     }
 
-    public void addArticle(Article article) {
-        articles.add(article);
+    /**
+     * Checks if this author wrote a specified article.
+     *
+     * @param article The article in question.
+     * @return True if this author wrote the article, false otherwise.
+     */
+    public boolean isAuthorOf(Article article) {
+        return articles.contains(article);
     }
 
-    public int getSize() {
-        return articles.size();
+    /**
+     * Updates the shortname for this article based on its name.
+     */
+    public final void updateShortname() {
+        shortname = Trimmer.trim(name);
     }
 
-    @Override
-    public String toString() {
-        return name;
-    }
-
+    /* Getters, setters, overrides and private methods: no Javadoc */
     public String getLastActive() {
         if (!articles.isEmpty()) {
             Collections.sort(articles);
@@ -52,12 +67,18 @@ public class Author extends AbstractPersistable<Long> implements Serializable {
         }
     }
 
-    public boolean isAuthorOf(Article article) {
-        return articles.contains(article);
+    public Article getLatest() {
+        Collections.sort(articles);
+        return articles.get(0);
     }
 
-    public void updateShortname() {
-        shortname = Trimmer.trim(name);
+    public int getSize() {
+        return articles.size();
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
 }

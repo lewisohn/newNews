@@ -6,7 +6,7 @@ a.new:before {
     content: '\002b \00a0';
 }
 
-#admin h3, .article-list, .article-list li, nav li {
+#admin h3, .article-list, .article-list li {
     display: inline-block;
     width: 6rem;
 }
@@ -22,6 +22,23 @@ a.new:before {
     max-height: 20em;
 }
 
+#articles, #authors, #categories {
+    padding-left: 0;
+}
+
+#articles li, #authors li, #categories li,
+#newarticle-authors ul li, #newarticle-categories ul li {
+    list-style-type: none;
+}
+
+#articles li:not(:first-child),
+#categories li:not(:first-child),
+form div:not(:first-child),
+form input[type="submit"], 
+nav li:not(:first-child) {
+    margin-top: 1em;
+}
+
 .article-list {
     padding-left: 0;
     margin: 0;
@@ -34,6 +51,14 @@ a.new:before {
 #article-standfirst {
     font-weight: bold;
     margin-bottom: 1em;
+}
+
+#authors h3, #categories h3 {
+    width: 100%;
+    background-color: #ccc;
+    border-bottom: solid 1px #000;
+    border-top: solid 1px #000;
+    padding-left: 0.3em;
 }
 
 body {
@@ -51,11 +76,11 @@ body, textarea {
 
 #content, #sidebar {
     float: left;
-    min-height: 300px;
+    min-height: 70vh;
 }
 
-#content a, #sidebar a, footer a,
-#content a:visited, #sidebar a:visited, footer a:visited {
+#content a, #sidebar a,
+#content a:visited, #sidebar a:visited {
     color: #0000ee;
 }
 
@@ -70,6 +95,10 @@ body, textarea {
 
 #content a.new:hover {
     background-color: #bd2fbd;
+}
+
+#delete-name {
+    font-weight: bold;
 }
 
 #edit-image img {
@@ -87,14 +116,8 @@ body, textarea {
     margin-left: 6.25rem;
 }
 
-footer {
-    clear: both;
-    font-size: 0.9em;
-    margin: 1em auto;
-    padding-top: 1em;
-}
-
-footer, header h1 {
+header h1 {
+    margin-bottom: 0.25em;
     text-align: center;
     width: 100%;
 }
@@ -102,10 +125,6 @@ footer, header h1 {
 form div * {
     vertical-align: top;
     line-height: 1.5em;
-}
-
-form div:not(:first-child), form input[type="submit"] {
-    margin-top: 1em;
 }
 
 form input[type="text"], form input[type="password"], form textarea {
@@ -138,28 +157,55 @@ header h1 a, nav li a {
     color: #fff;
 }
 
-nav li:first-child {
+.list-article {
+    height: 9rem;
+    overflow: hidden;
+}
+
+.list-article a {
+    font-size: 1.5em;
     font-weight: bold;
 }
 
-nav li:not(:first-child) {
-    margin-left: 1em;
+.list-article-image {
+    float: left;
+    text-align: center;
+    margin-right: 1rem;
+    width: 16rem;
+}
+
+.list-article-image img {
+    max-height: 9rem;
+    max-width: 16rem;
+}
+
+nav li {
+    display: inline-block;
+    min-width: 8rem;
+    max-width: 12rem;
+}
+
+nav ul:first-child li {
+    font-weight: bold;
+}
+
+nav ul {
+    padding: 0;
+    text-align: center;
 }
 
 nav ul {
     margin: 0;
-    padding: 0;
-    text-align: center;
+}
+
+nav ul:not(:first-child) {
+    margin-top: 1em;
 }
 
 #newarticle-authors ul, #newarticle-categories ul {
     display: inline-block;
     margin: 0 auto;
     padding-left: 0;   
-}
-
-#newarticle-authors ul li, #newarticle-categories ul li {
-    list-style-type: none;
 }
 
 table {
@@ -192,9 +238,14 @@ th, td {
 }
 
 #sidebar {
-    background-color: #000;
-    padding: 2em 0;
-    width: calc(25% - 2em);
+    border-left: 1px solid #ccc;
+    margin-top: 1em;
+    padding-left: 2em;
+    width: calc(25% - 4em - 1px);
+}
+
+#sidebar h2 {
+    font-size: 1.25em;
 }
 
 #wrapper {

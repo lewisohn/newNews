@@ -2,11 +2,13 @@ package newnews.controller;
 
 import java.io.IOException;
 import java.util.Optional;
+import javax.transaction.Transactional;
 import newnews.domain.Article;
 import newnews.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,11 +16,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Controller for listing, viewing, creating, editing and deleting articles.
+ *
+ * @author Oliver
+ */
 @Controller
 public class ArticleController extends MasterController {
 
     @Autowired
     private ArticleService artServ;
+
+    @Transactional
+    @DeleteMapping("/articles/{shortname}/delete")
+    public String deleteAuthor(@PathVariable String shortname) {
+        artServ.deleteArticle(shortname);
+        return "redirect:/admin";
+    }
 
     @GetMapping("/articles/{shortname}")
     public String getArticle(Model model, @PathVariable String shortname) {
@@ -26,6 +40,18 @@ public class ArticleController extends MasterController {
         artServ.view(article);
         model.addAttribute("article", article);
         return "article";
+    }
+
+    @GetMapping(value = {"/", "/index", "/articles"})
+    public String getArticles() {
+        return "articles";
+    }
+
+    @GetMapping("/articles/{shortname}/delete")
+    public String getDeleteArticle(Model model, @PathVariable String shortname) {
+        Article article = artServ.findByShortname(shortname.toLowerCase());
+        model.addAttribute("article", article);
+        return "admin/deletearticle";
     }
 
     @GetMapping("/articles/{shortname}/edit")
@@ -40,11 +66,6 @@ public class ArticleController extends MasterController {
     public byte[] getImage(@PathVariable String shortname) {
         Article article = artServ.findByShortname(shortname.toLowerCase());
         return article.getImage();
-    }
-
-    @GetMapping(value = {"/", "/articles"})
-    public String getIndex() {
-        return "index";
     }
 
     @GetMapping("/articles/new")

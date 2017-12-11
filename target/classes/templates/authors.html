@@ -6,15 +6,22 @@
         <div id="wrapper">
             <div id="content">
                 <h2>Authors</h2>
-                <ul id="categories">
+                <div th:if="${authSize == 0}">No authors</div>
+                <ul id="authors" th:if="${authSize > 0}">
                     <li th:each="author : ${authors}">
-                        <a th:href="${'/authors/' + author.shortname}" th:text="${author.name}"></a>
+                        <h3><a th:href="${'/authors/' + author.shortname}" th:text="${author.name}"></a></h3>
+                        <div th:if="${author.size == 0}">No articles</div>
+                        <div class="list-article" th:if="${author.size > 0}">
+                            <a th:href="'/articles/' + ${author.latest.shortname}" class="list-article-image">
+                                <img th:src="@{/articles/{shortname}/image(shortname=${author.latest.shortname})}" th:alt="${author.latest.name}" />
+                            </a>
+                            <a th:href="'/articles/' + ${author.latest.shortname}" th:text="${author.latest.name}">Article</a>
+                            <p th:text="${author.latest.standfirst}">Standfirst</p>
+                        </div>
                     </li>
                 </ul>
             </div>
-            <div id ="sidebar">
-            </div>
-            <footer th:include="fragments/footer :: footer"></footer>
+            <div id="sidebar" th:include="fragments/sidebar :: sidebar"></div>
         </div>
     </body>
 </html>

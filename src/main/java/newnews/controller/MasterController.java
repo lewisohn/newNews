@@ -13,6 +13,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+/**
+ * Abstract controller that adds attributes to the model.
+ *
+ * @author Oliver
+ */
 public abstract class MasterController {
 
     @Autowired
@@ -25,9 +30,12 @@ public abstract class MasterController {
     private final Pageable fiveByViews;
     private final Pageable tenByName;
 
+    /**
+     * Sets the Pageable elements for filtering entities.
+     */
     public MasterController() {
-        fiveByDateTime = PageRequest.of(0, 5, Sort.Direction.ASC, "dateTime");
-        fiveByViews = PageRequest.of(0, 5, Sort.Direction.ASC, "views");
+        fiveByDateTime = PageRequest.of(0, 5, Sort.Direction.DESC, "dateTime");
+        fiveByViews = PageRequest.of(0, 5, Sort.Direction.DESC, "views");
         tenByName = PageRequest.of(0, 10, Sort.Direction.ASC, "name");
     }
 
@@ -35,20 +43,20 @@ public abstract class MasterController {
     public Page<Category> modelCategories() {
         return catServ.findAll(tenByName);
     }
-    
+
     @ModelAttribute("catSize")
     public Long modelCatSize() {
-        return catServ.size();
+        return catServ.getSize();
     }
-    
+
     @ModelAttribute("artSize")
     public Long modelArtSize() {
-        return artServ.size();
+        return artServ.getSize();
     }
-    
+
     @ModelAttribute("authSize")
     public Long modelAuthSize() {
-        return authServ.size();
+        return authServ.getSize();
     }
 
     @ModelAttribute("latest")

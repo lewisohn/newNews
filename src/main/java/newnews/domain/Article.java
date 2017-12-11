@@ -20,6 +20,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+/**
+ * A news article. Must contain a headline, image, standfirst, body, at least
+ * one category and at least one author.
+ *
+ * @author Oliver
+ */
 @Data
 @Entity
 @EqualsAndHashCode(callSuper = false)
@@ -46,6 +52,16 @@ public class Article extends AbstractPersistable<Long> implements Serializable, 
     @Column(columnDefinition = "LONGVARCHAR")
     private String text;
 
+    /**
+     * Creates a new article with the given parameters.
+     *
+     * @param authors A list of authors who wrote this article.
+     * @param categories A list of categories assigned to this article.
+     * @param name The headline of this article.
+     * @param standfirst The opening paragraph of this article, sometimes called
+     * a lead or lede.
+     * @param text The body of this article.
+     */
     public Article(List<Author> authors, List<Category> categories, String name, String standfirst, String text) {
         this.authors = authors;
         this.categories = categories;
@@ -57,39 +73,30 @@ public class Article extends AbstractPersistable<Long> implements Serializable, 
         this.visits = new ArrayList<>();
     }
 
+    /**
+     * Registers a new visit to this article.
+     *
+     * @param visit The visit in question.
+     */
     public void addVisit(Visit visit) {
         visits.add(visit);
     }
 
+    /**
+     * Updates the shortname for this article based on its name.
+     */
+    public final void updateShortname() {
+        shortname = Trimmer.trim(name);
+    }
+
+    /* Getters, setters, overrides and private methods: no Javadoc */
     public LocalDate getDate() {
         return dateTime.toLocalDate();
     }
 
-    public List<Author> getAuthors() {
-        return authors;
-    }
-
     public int getViews() {
-        LocalDateTime now = LocalDateTime.now();
-        Iterator<Visit> it = visits.iterator();
-        while (it.hasNext()) {
-            Visit visit = it.next();
-            long seconds = ChronoUnit.SECONDS.between(visit.getDateTime(), now);
-            if (seconds > 604800) { // 604800 seconds in one week
-                it.remove();
-            } else {
-                break;
-            }
-        }
+        updateViews();
         return visits.size();
-    }
-
-    public void addImage(byte[] image) {
-        this.image = image;
-    }
-
-    public final void updateShortname() {
-        shortname = Trimmer.trim(name);
     }
 
     @Override
@@ -102,5 +109,18 @@ public class Article extends AbstractPersistable<Long> implements Serializable, 
         return a.dateTime.compareTo(this.dateTime);
     }
 
+    private void updateViews() {
+        LocalDateTime now = LocalDateTime.now();
+        Iterator<Visit> it = visits.iterator();
+        while (it.hasNext()) {
+            Visit visit = it.next();
+            long seconds = ChronoUnit.SECONDS.between(visit.getDateTime(), now);
+            if (seconds > 604800) { // 604800 seconds in one week
+                it.remove();
+            } else {
+                break;
+            }
+        }
+    }
 
 }

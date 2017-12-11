@@ -5,7 +5,7 @@
         <header th:include="fragments/header :: header"></header>
         <div id="wrapper">
             <div id="content">
-                <h2>Control Panel</h2>
+                <h2>Control panel</h2>
                 <h3>Articles</h3> <a href="articles/new" class="new">New article</a>
                 <table id="articles">
                     <thead>
@@ -79,9 +79,7 @@
                     </tbody>
                 </table>
             </div>
-            <div id ="sidebar">
-            </div>
-            <footer th:include="fragments/footer :: footer"></footer>
+            <div id="sidebar" th:include="fragments/sidebar :: sidebar"></div>
         </div>
     </body>
 </html>

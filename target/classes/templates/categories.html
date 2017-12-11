@@ -6,15 +6,22 @@
         <div id="wrapper">
             <div id="content">
                 <h2>Categories</h2>
-                <ul id="categories">
+                <div th:if="${catSize == 0}">No categories</div>
+                <ul id="categories" th:if="${catSize > 0}">
                     <li th:each="category : ${categories}">
-                        <a th:href="${'/categories/' + category.shortname}" th:text="${category.name}"></a>
+                        <h3><a th:href="${'/categories/' + category.shortname}" th:text="${category.name}"></a></h3>
+                        <div th:if="${category.size == 0}">No articles</div>
+                        <div class="list-article" th:if="${category.size > 0}">
+                            <a th:href="'/articles/' + ${category.latest.shortname}" class="list-article-image">
+                                <img th:src="@{/articles/{shortname}/image(shortname=${category.latest.shortname})}" th:alt="${category.latest.name}" />
+                            </a>
+                            <a th:href="'/articles/' + ${category.latest.shortname}" th:text="${category.latest.name}">Article</a>
+                            <p th:text="${category.latest.standfirst}">Standfirst</p>
+                        </div>
                     </li>
                 </ul>
             </div>
-            <div id ="sidebar">
-            </div>
-            <footer th:include="fragments/footer :: footer"></footer>
+            <div id="sidebar" th:include="fragments/sidebar :: sidebar"></div>
         </div>
     </body>
 </html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Sidebar</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body th:fragment="sidebar">
+        <h2>Most viewed articles - seven days</h2>
+        <ol class="sidebar-articles">
+            <li th:each="article : ${popular}">
+                <div class="sidebar-list-article">
+                    <a th:href="'/articles/' + ${article.shortname}" th:text="${article.name}">Article</a>
+                </div>
+            </li>
+        </ol>
+        <h2>Latest articles</h2>
+        <ol class="sidebar-articles">
+            <li th:each="article : ${latest}">
+                <div class="sidebar-list-article">
+                    <a th:href="'/articles/' + ${article.shortname}" th:text="${article.name}">Article</a>
+                </div>
+            </li>
+        </ol>
+    </body>
+</html>
